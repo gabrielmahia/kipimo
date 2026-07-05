@@ -1,0 +1,46 @@
+{"id": "rt-01", "type": "server_routing", "lang": "sw", "input": "Nataka kutuma pesa kwa mama yangu kupitia simu.", "options": null, "gold": ["mpesa-mcp"], "metric": "exact"}
+{"id": "rt-02", "type": "server_routing", "lang": "sw", "input": "Ninahitaji kujua deni langu la ushuru KRA.", "options": null, "gold": ["kra-mcp"], "metric": "exact"}
+{"id": "rt-03", "type": "server_routing", "lang": "sw", "input": "Nataka mkopo mdogo kwa biashara yangu ya mboga.", "options": null, "gold": ["mkopo-mcp"], "metric": "exact"}
+{"id": "rt-04", "type": "server_routing", "lang": "sw", "input": "Je, kuna bima ya mazao dhidi ya ukame?", "options": null, "gold": ["bima-mcp"], "metric": "exact"}
+{"id": "rt-05", "type": "server_routing", "lang": "sw", "input": "Bei ya mahindi sokoni Nakuru ni ngapi leo?", "options": null, "gold": ["soko-mcp"], "metric": "exact"}
+{"id": "rt-06", "type": "server_routing", "lang": "sw", "input": "Nataka kutuma pesa kutoka Marekani hadi Kenya kwa gharama nafuu.", "options": null, "gold": ["remit-mcp"], "metric": "exact"}
+{"id": "rt-07", "type": "server_routing", "lang": "sw", "input": "Ni wapi hospitali iliyo karibu inayotoa huduma za upasuaji?", "options": null, "gold": ["kenya-health-mcp"], "metric": "exact"}
+{"id": "rt-08", "type": "server_routing", "lang": "sw", "input": "Mtoto wangu ana homa na kikohozi, nifanye nini?", "options": null, "gold": ["afya-mcp"], "metric": "exact"}
+{"id": "rt-09", "type": "server_routing", "lang": "sw", "input": "Ninahisi huzuni sana na msongo wa mawazo, nipate msaada wapi?", "options": null, "gold": ["afya-ya-akili-mcp"], "metric": "exact"}
+{"id": "rt-10", "type": "server_routing", "lang": "sw", "input": "Nipande mahindi lini msimu huu Uasin Gishu?", "options": null, "gold": ["kilimo-mcp"], "metric": "exact"}
+{"id": "rt-11", "type": "server_routing", "lang": "sw", "input": "Hali ya ukame kaunti ya Baringo ikoje sasa?", "options": null, "gold": ["wapimaji-mcp"], "metric": "exact"}
+{"id": "rt-12", "type": "server_routing", "lang": "sw", "input": "Nahitaji kibali cha mazingira kwa kiwanda changu kidogo.", "options": null, "gold": ["mazingira-mcp"], "metric": "exact"}
+{"id": "rt-13", "type": "server_routing", "lang": "sw", "input": "Huduma za kaunti ya Machakos ni zipi na bajeti yake?", "options": null, "gold": ["county-mcp"], "metric": "exact"}
+{"id": "rt-14", "type": "server_routing", "lang": "sw", "input": "Nifanye nini kupata cheti cha kuzaliwa? Fomu gani inahitajika?", "options": null, "gold": ["fomu-mcp"], "metric": "exact"}
+{"id": "rt-15", "type": "server_routing", "lang": "sw", "input": "Mwajiri wangu amenifukuza bila notisi. Haki zangu ni zipi?", "options": null, "gold": ["haki-ya-kazi-mcp"], "metric": "exact"}
+{"id": "rt-16", "type": "server_routing", "lang": "sw", "input": "Natafuta kazi ya udereva Nairobi.", "options": null, "gold": ["kazi-mcp"], "metric": "exact"}
+{"id": "rt-17", "type": "server_routing", "lang": "sw", "input": "Shule za sekondari Kiambu na matokeo ya KCSE.", "options": null, "gold": ["elimu-mcp"], "metric": "exact"}
+{"id": "rt-18", "type": "server_routing", "lang": "sw", "input": "Tafsiri sentensi hii kwa Kiingereza tafadhali.", "options": null, "gold": ["tafsiri-mcp"], "metric": "exact"}
+{"id": "rt-19", "type": "server_routing", "lang": "sw", "input": "Nataka kuhakiki ujuzi na vyeti vya mfanyakazi ninayemwajiri.", "options": null, "gold": ["sifa-mcp"], "metric": "exact"}
+{"id": "rt-20", "type": "server_routing", "lang": "sw", "input": "Nyaraka za shamba langu Kiambu — nithibitishe umiliki.", "options": null, "gold": ["ardhi-mcp"], "metric": "exact"}
+{"id": "rt-21", "type": "server_routing", "lang": "sw", "input": "Nyumba ya kupanga Ruaka bei gani kwa mwezi?", "options": null, "gold": ["nyumba-mcp"], "metric": "exact"}
+{"id": "rt-22", "type": "server_routing", "lang": "sw", "input": "Njia za matatu kutoka CBD hadi Rongai?", "options": null, "gold": ["usafiri-mcp"], "metric": "exact"}
+{"id": "rt-23", "type": "server_routing", "lang": "sw", "input": "Niko diaspora — nasimamia vipi mali yangu Kenya nikiwa nje?", "options": null, "gold": ["diaspora-mcp"], "metric": "exact"}
+{"id": "rt-24", "type": "server_routing", "lang": "sw", "input": "Tunataka kuanzisha chama cha kuweka akiba mtaani.", "options": null, "gold": ["jumuia-mcp"], "metric": "exact"}
+{"id": "rt-25", "type": "server_routing", "lang": "sw", "input": "Umeme haujafika kijiji chetu — kuna mpango gani wa nishati?", "options": null, "gold": ["nishati-mcp"], "metric": "exact"}
+{"id": "tm-01", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'mkopo' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["credit/loan"], "metric": "exact_ci"}
+{"id": "tm-02", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'bima' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["insurance"], "metric": "exact_ci"}
+{"id": "tm-03", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'faida' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["profit/returns"], "metric": "exact_ci"}
+{"id": "tm-04", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'soko' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["market"], "metric": "exact_ci"}
+{"id": "tm-05", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'afya' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["health"], "metric": "exact_ci"}
+{"id": "tm-06", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'afya ya akili' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["mental health"], "metric": "exact_ci"}
+{"id": "tm-07", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'kilimo' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["agriculture"], "metric": "exact_ci"}
+{"id": "tm-08", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'wapimaji' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["water"], "metric": "exact_ci"}
+{"id": "tm-09", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'mazingira' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["environment"], "metric": "exact_ci"}
+{"id": "tm-10", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'fomu' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["forms"], "metric": "exact_ci"}
+{"id": "tm-11", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'haki ya kazi' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["labour rights"], "metric": "exact_ci"}
+{"id": "tm-12", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'kazi' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["work"], "metric": "exact_ci"}
+{"id": "tm-13", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'habari' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["news"], "metric": "exact_ci"}
+{"id": "tm-14", "type": "term_grounding", "lang": "sw", "input": "Neno la Kiswahili 'elimu' linamaanisha nini kwa Kiingereza (neno moja au mawili)?", "gold": ["education"], "metric": "exact_ci"}
+{"id": "cas-01", "type": "cascade_routing", "lang": "sw", "input": "Ukame umefikia hatua ya tahadhari Baringo. Taarifa hii inapaswa kufika kwenye sekta zipi?", "event": {"domain": "water", "event_type": "drought_alert", "severity": "alert"}, "gold": ["agriculture", "finance", "health"], "metric": "set_f1"}
+{"id": "cas-02", "type": "cascade_routing", "lang": "sw", "input": "Ukame ni hatari sana Turkana. Sekta zipi zinapaswa kuarifiwa?", "event": {"domain": "water", "event_type": "drought_alert", "severity": "critical"}, "gold": ["agriculture", "finance", "health"], "metric": "set_f1"}
+{"id": "cas-03", "type": "cascade_routing", "lang": "sw", "input": "Mlipuko wa kipindupindu Kisumu. Taarifa ipelekwe kwenye sekta zipi?", "event": {"domain": "health", "event_type": "disease_outbreak", "severity": "alert"}, "gold": ["civic", "procurement"], "metric": "set_f1"}
+{"id": "cas-04", "type": "cascade_routing", "lang": "sw", "input": "Onyo la mafuriko bonde la Tana. Sekta zipi zihusishwe?", "event": {"domain": "water", "event_type": "flood_alert", "severity": "warning"}, "gold": ["civic", "health"], "metric": "set_f1"}
+{"id": "cas-05", "type": "cascade_routing", "lang": "sw", "input": "Mafuriko makubwa Tana River. Nani apokee taarifa?", "event": {"domain": "water", "event_type": "flood_alert", "severity": "critical"}, "gold": ["civic", "health"], "metric": "set_f1"}
+{"id": "cas-06", "type": "cascade_routing", "lang": "sw", "input": "Mlipuko mkubwa wa ugonjwa. Sekta zipi zinahusika?", "event": {"domain": "health", "event_type": "disease_outbreak", "severity": "critical"}, "gold": ["civic", "procurement"], "metric": "set_f1"}
+{"id": "cas-07", "type": "cascade_routing", "lang": "sw", "input": "Dalili za ukame zimeanza Kajiado. Wapi taarifa ipelekwe?", "event": {"domain": "water", "event_type": "drought_alert", "severity": "warning"}, "gold": ["agriculture", "finance"], "metric": "set_f1"}
