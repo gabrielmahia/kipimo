@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kipimo"
+version = "0.1.0"
+description = "Swahili agent-task evaluation suite for the East Africa coordination stack — model-agnostic seed benchmark (46 tasks: server routing, term grounding, cascade routing)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "AfriKaziOS maintainers"}]
+keywords = ["swahili", "benchmark", "evaluation", "mcp", "kenya", "ai-agents"]
+
+[project.urls]
+Homepage = "https://github.com/gabrielmahia/kipimo"
+Repository = "https://github.com/gabrielmahia/kipimo"
+Issues = "https://github.com/gabrielmahia/kipimo/issues"
+
+[project.scripts]
+kipimo = "kipimo.cli:_main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["kipimo"]
+
+[tool.setuptools.package-data]
+kipimo = ["data/*.jsonl"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
