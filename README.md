@@ -10,6 +10,8 @@ Over one hundred million people coordinate their lives in Swahili, yet no benchm
 | `term_grounding` | 14 | Swahili domain term → English meaning | exact (case-insensitive) |
 | `cascade_routing` | 7 | Coordination event → which sectors must be notified | set F1 |
 
+**[Live leaderboard →](https://huggingface.co/spaces/gmahia/kipimo-leaderboard)** — score any model in your browser, no keys.
+
 ## Use it (any model, no API keys)
 
 ```bash
