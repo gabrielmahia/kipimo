@@ -10,6 +10,7 @@ Usage:
     kipimo tasks                 # emit the task set (JSONL) to stdout
     kipimo template              # emit an empty predictions file to fill in
     kipimo score preds.jsonl     # score predictions against gold
+    kipimo targets               # emit the scorecard target registry (v0.2)
 """
 
 from __future__ import annotations
@@ -20,7 +21,7 @@ import sys
 from collections import defaultdict
 from importlib import resources
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 DISCLAIMER = ("kipimo v0.1 is a SEED benchmark (46 tasks). Swahili phrasing is "
               "simple-register and pending native-speaker review (issue #1). "
@@ -81,12 +82,19 @@ def main(argv: list[str] | None = None) -> int:
                                 epilog=DISCLAIMER)
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("tasks", help="emit task set JSONL to stdout")
+    tp = sub.add_parser("targets", help="emit scorecard target registry JSONL to stdout")
+    tp.add_argument("--family", choices=("closed-api", "open-weight", "small-open"),
+                    default=None, help="filter by target family")
     sub.add_parser("template", help="emit empty predictions JSONL to stdout")
     sp = sub.add_parser("score", help="score a predictions file")
     sp.add_argument("predictions", help="JSONL with {id, prediction:[...]} rows")
     args = p.parse_args(argv)
 
-    if args.cmd == "tasks":
+    if args.cmd == "targets":
+        from .targets import list_targets
+        for t in list_targets(args.family):
+            print(json.dumps(t, ensure_ascii=False))
+    elif args.cmd == "tasks":
         for t in load_tasks():
             print(json.dumps(t, ensure_ascii=False))
     elif args.cmd == "template":

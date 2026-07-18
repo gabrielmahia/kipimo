@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kipimo"
-version = "0.1.0"
+version = "0.2.0"
 description = "Swahili agent-task evaluation suite for the East Africa coordination stack — model-agnostic seed benchmark (46 tasks: server routing, term grounding, cascade routing)."
 readme = "README.md"
 requires-python = ">=3.10"
