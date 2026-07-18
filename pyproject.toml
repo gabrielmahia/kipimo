@@ -17,6 +17,9 @@ keywords = ["swahili", "benchmark", "evaluation", "mcp", "kenya", "ai-agents"]
 Homepage = "https://github.com/gabrielmahia/kipimo"
 Repository = "https://github.com/gabrielmahia/kipimo"
 Issues = "https://github.com/gabrielmahia/kipimo/issues"
+Documentation = "https://github.com/gabrielmahia/nairobi-stack"
+"MCP Registry" = "https://registry.modelcontextprotocol.io"
+Datasets = "https://huggingface.co/gmahia"
 
 [project.scripts]
 kipimo = "kipimo.cli:_main"
