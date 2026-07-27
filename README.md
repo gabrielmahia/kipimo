@@ -23,6 +23,10 @@ kipimo score preds.jsonl          # per-type + overall report
 
 The harness never calls a model — you generate predictions with whatever system you're evaluating; kipimo only scores. Any lab can publish comparable numbers.
 
+## Data sovereignty
+
+The models deployable under African data-sovereignty constraints are open-weight and self-hostable. kipimo scores that tier on equal terms with frontier APIs so builders can test whether the model they are *allowed* to run is good enough — see [docs/DATA_SOVEREIGNTY.md](docs/DATA_SOVEREIGNTY.md) and `examples/generate_predictions.py`.
+
 ## Honesty box
 - **v0.1 is a seed set.** 46 tasks establish the format and scoring; breadth comes from contributions.
 - Swahili phrasing is simple-register and **pending native-speaker review** — that is [issue #1](https://github.com/gabrielmahia/kipimo/issues), and corrections are the most valuable contribution possible.

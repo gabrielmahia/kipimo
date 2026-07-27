@@ -41,12 +41,20 @@ TARGETS: list[dict] = [
     },
     # --- open weights (frontier-adjacent, downloadable) ---
     {
+        "id": "kimi-k2.6",
+        "label": "Kimi K2.6 (Moonshot)",
+        "family": "open-weight",
+        "params_b": 1000,
+        "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
+        "notes": "weights public (HF, ~900k downloads); 1T MoE; strong agentic/tool-use; self-hostable via vLLM/SGLang/Ollama",
+    },
+    {
         "id": "kimi-k3",
         "label": "Kimi K3 (Moonshot)",
         "family": "open-weight",
         "params_b": 2800,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
-        "notes": "weights public from 2026-07-27; MoE",
+        "notes": "2.8T MoE; weights slated 2026-07-27 — verify public checkpoint before use; API-only until confirmed",
     },
     {
         "id": "glm-5.2",
