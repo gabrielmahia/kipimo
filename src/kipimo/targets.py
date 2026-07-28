@@ -54,7 +54,7 @@ TARGETS: list[dict] = [
         "family": "open-weight",
         "params_b": 2800,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
-        "notes": "2.8T MoE; open weights due 2026-07-27 at moonshotai/Kimi-K3 (repo gated at listing) — confirm public checkpoint + read LICENSE from that repo before use; do not assume Modified MIT until the card publishes",
+        "notes": "2.8T MoE, 104B active; weights PUBLIC on HF (moonshotai/Kimi-K3, native multimodal, 1M ctx) under the custom \"Kimi K3 License\" — read LICENSE before redistribution (NOT MIT/Apache); strong agentic/MCP scores make it a valid frontier reference",
     },
     {
         "id": "glm-5.2",
