@@ -54,7 +54,7 @@ TARGETS: list[dict] = [
         "family": "open-weight",
         "params_b": 2800,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
-        "notes": "2.8T MoE; weights slated 2026-07-27 — verify public checkpoint before use; API-only until confirmed",
+        "notes": "2.8T MoE, 104B active; weights PUBLIC on HF (moonshotai/Kimi-K3, native multimodal, 1M ctx) under the custom \"Kimi K3 License\" — read LICENSE before redistribution (NOT MIT/Apache); strong agentic/MCP scores make it a valid frontier reference",
     },
     {
         "id": "glm-5.2",
@@ -104,6 +104,20 @@ TARGETS: list[dict] = [
         "params_b": 12,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
         "notes": "runnable on a single consumer GPU",
+    },
+    {
+        "id": "inkubalm-0.4b",
+        "label": "InkubaLM 0.4B (Lelapa AI)",
+        "family": "small-open",
+        "params_b": 0.4,
+        "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
+        "notes": (
+            "African-built SLM (hf: lelapa/InkubaLM-0.4B) covering Swahili + "
+            "isiZulu/Yoruba/Hausa/isiXhosa; MobileLLM-class, mobile/edge-runnable "
+            "(community variants down to ~40M). License CC BY-NC 4.0 — evaluatable, "
+            "non-commercial redistribution. The floor of the deployment tier this "
+            "benchmark exists to measure."
+        ),
     },
 ]
 
