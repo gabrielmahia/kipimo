@@ -106,6 +106,19 @@ TARGETS: list[dict] = [
         "notes": "runnable on a single consumer GPU",
     },
     {
+        "id": "tiny-aya-earth",
+        "label": "Tiny Aya Earth (Cohere Labs)",
+        "family": "small-open",
+        "params_b": 3.35,
+        "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
+        "notes": (
+            "Cohere Labs Tiny Aya (Feb 2026), Earth variant tuned for West-Asian + "
+            "African languages incl. Swahili; 70+ langs, 8K ctx, mobile/edge-runnable, "
+            "CC-BY-NC-4.0. Sits between InkubaLM 0.4B and the ~12B tier. Verify exact "
+            "HF repo id before use."
+        ),
+    },
+    {
         "id": "inkubalm-0.4b",
         "label": "InkubaLM 0.4B (Lelapa AI)",
         "family": "small-open",
