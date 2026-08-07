@@ -8,3 +8,5 @@ from .targets import FAMILIES as FAMILIES
 from .targets import TARGETS as TARGETS
 from .targets import get_target as get_target
 from .targets import list_targets as list_targets
+from .harness import run_scorecard as run_scorecard
+from .harness import run_target as run_target

@@ -10,6 +10,7 @@ Usage:
     kipimo tasks                 # emit the task set (JSONL) to stdout
     kipimo template              # emit an empty predictions file to fill in
     kipimo score preds.jsonl     # score predictions against gold
+    kipimo run generators.json   # run targets in parallel -> ranked scorecard
     kipimo targets               # emit the scorecard target registry (v0.2)
 """
 
@@ -21,7 +22,7 @@ import sys
 from collections import defaultdict
 from importlib import resources
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 DISCLAIMER = ("kipimo v0.1 is a SEED benchmark (46 tasks). Swahili phrasing is "
               "simple-register and pending native-speaker review (issue #1). "
@@ -86,6 +87,10 @@ def main(argv: list[str] | None = None) -> int:
     tp.add_argument("--family", choices=("closed-api", "open-weight", "small-open"),
                     default=None, help="filter by target family")
     sub.add_parser("template", help="emit empty predictions JSONL to stdout")
+    rp = sub.add_parser("run", help="run generators across targets in parallel -> scorecard")
+    rp.add_argument("generators", help='JSON file: {"target_id": "generator command", ...}')
+    rp.add_argument("--timeout", type=int, default=600, help="seconds per target (default 600)")
+    rp.add_argument("--workers", type=int, default=4, help="parallel targets (default 4)")
     sp = sub.add_parser("score", help="score a predictions file")
     sp.add_argument("predictions", help="JSONL with {id, prediction:[...]} rows")
     args = p.parse_args(argv)
@@ -100,6 +105,15 @@ def main(argv: list[str] | None = None) -> int:
     elif args.cmd == "template":
         for t in load_tasks():
             print(json.dumps({"id": t["id"], "prediction": []}))
+    elif args.cmd == "run":
+        from .harness import load_generators, run_scorecard
+        card = run_scorecard(load_generators(args.generators),
+                             timeout=args.timeout, max_workers=args.workers)
+        print(json.dumps(card, indent=2, ensure_ascii=False))
+        if card["targets_untested"]:
+            print(f"\nNote: {card['targets_untested']} target(s) UNTESTED (unknown, not zero). "
+                  f"See 'untested' in the scorecard.", file=sys.stderr)
+        print(f"\n{DISCLAIMER}", file=sys.stderr)
     else:
         rep = score_file(args.predictions)
         print(json.dumps(rep, indent=2))
