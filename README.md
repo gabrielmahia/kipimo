@@ -47,3 +47,29 @@ MIT-licensed harness, CC BY 4.0 data. Feedback via GitHub Issues only — pull r
 
 Model-agnostic by design: closed APIs, open-weight models, and small distilled models are all first-class citizens.
 <!-- /interconnect:v1 -->
+
+## Running a scorecard (`kipimo run`)
+
+Fan out across targets in parallel, converge to one ranked scorecard. kipimo
+still never calls a model API — you supply a *generator command* per target
+(any process that reads tasks JSONL on stdin and writes predictions JSONL on
+stdout; see `examples/generate_predictions.py`).
+
+```bash
+cat > generators.json <<'JSON'
+{
+  "gemma-3-12b":    "python generate_predictions.py --model gemma-3-12b",
+  "inkubalm-0.4b":  "python generate_predictions.py --model inkubalm-0.4b",
+  "kimi-k3":        ""
+}
+JSON
+
+kipimo run generators.json --timeout 600 --workers 4
+```
+
+**An untested target is UNKNOWN, never zero.** If a generator crashes, times
+out, or is unconfigured, that target appears under `untested` with a reason —
+it is not ranked at 0.0. Conflating "the model failed the task" with "we never
+tested the model" is how an evaluation starts measuring its own assumptions
+instead of reality. Every scorecard also reports `coverage`, so a partial run
+cannot be misread as a ranking of the field.
