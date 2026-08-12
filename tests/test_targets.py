@@ -6,13 +6,32 @@ from kipimo import FAMILIES, TARGETS, get_target, list_targets
 from kipimo.cli import main
 
 
+CORE = {"id", "label", "family", "params_b", "endpoint_env", "notes"}
+PROFILE = {"license", "self_hostable", "hardware_tier", "offline_capable"}
+HARDWARE = {"edge", "workstation", "server", "datacenter", "api-only"}
+
+
 def test_schema_and_uniqueness():
     ids = [t["id"] for t in TARGETS]
     assert len(ids) == len(set(ids))
     for t in TARGETS:
-        assert set(t) == {"id", "label", "family", "params_b", "endpoint_env", "notes"}
+        assert CORE <= set(t), f"{t['id']} missing core keys"
+        assert set(t) <= CORE | PROFILE, f"{t['id']} has unknown keys"
         assert t["family"] in FAMILIES
         assert isinstance(t["endpoint_env"], list) and t["endpoint_env"]
+
+
+def test_deployment_profile_is_valid_where_present():
+    for t in TARGETS:
+        if "hardware_tier" in t:
+            assert t["hardware_tier"] in HARDWARE, t["id"]
+        if "self_hostable" in t:
+            assert isinstance(t["self_hostable"], bool)
+        if "offline_capable" in t:
+            assert isinstance(t["offline_capable"], bool)
+        # an api-only target can be neither self-hostable nor offline
+        if t.get("hardware_tier") == "api-only":
+            assert t.get("self_hostable") is False and t.get("offline_capable") is False, t["id"]
 
 
 def test_every_family_represented():

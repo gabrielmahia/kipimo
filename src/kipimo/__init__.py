@@ -10,3 +10,6 @@ from .targets import get_target as get_target
 from .targets import list_targets as list_targets
 from .harness import run_scorecard as run_scorecard
 from .harness import run_target as run_target
+from .pareto import analyze as analyze
+from .pareto import pareto_frontier as pareto_frontier
+from .pareto import cheapest_qualifier as cheapest_qualifier
