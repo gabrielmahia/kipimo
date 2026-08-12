@@ -73,3 +73,25 @@ it is not ranked at 0.0. Conflating "the model failed the task" with "we never
 tested the model" is how an evaluation starts measuring its own assumptions
 instead of reality. Every scorecard also reports `coverage`, so a partial run
 cannot be misread as a ranking of the field.
+
+## From leaderboard to deployment decision (`kipimo analyze`)
+
+A ranking says which model scored highest. Institutions need a different answer:
+**what is the cheapest model we may lawfully run ourselves that clears the bar?**
+
+```bash
+kipimo run generators.json > card.json
+kipimo analyze card.json --costs costs.json --threshold 0.85
+```
+
+Targets carry a deployment profile (`license`, `self_hostable`, `hardware_tier`,
+`offline_capable`), which `analyze` joins with measured accuracy and
+operator-supplied cost to report the Pareto frontier and the cheapest
+self-hostable qualifier:
+
+> *"gemma-3-12b is self-hostable, clears 0.85, and reaches 90% of the best
+> measured target's score."*
+
+Costs are supplied per run, never stored in the registry — vendor prices move
+weekly and a stale number in a public benchmark is worse than none. A target
+with no cost supplied is excluded from the frontier, **not treated as free**.

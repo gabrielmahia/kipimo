@@ -11,6 +11,7 @@ Usage:
     kipimo template              # emit an empty predictions file to fill in
     kipimo score preds.jsonl     # score predictions against gold
     kipimo run generators.json   # run targets in parallel -> ranked scorecard
+    kipimo analyze card.json     # -> Pareto frontier + cheapest sovereign qualifier
     kipimo targets               # emit the scorecard target registry (v0.2)
 """
 
@@ -22,7 +23,7 @@ import sys
 from collections import defaultdict
 from importlib import resources
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 DISCLAIMER = ("kipimo v0.1 is a SEED benchmark (46 tasks). Swahili phrasing is "
               "simple-register and pending native-speaker review (issue #1). "
@@ -91,6 +92,10 @@ def main(argv: list[str] | None = None) -> int:
     rp.add_argument("generators", help='JSON file: {"target_id": "generator command", ...}')
     rp.add_argument("--timeout", type=int, default=600, help="seconds per target (default 600)")
     rp.add_argument("--workers", type=int, default=4, help="parallel targets (default 4)")
+    ap = sub.add_parser("analyze", help="scorecard -> deployment decision (Pareto + cheapest qualifier)")
+    ap.add_argument("scorecard", help="JSON scorecard from `kipimo run`")
+    ap.add_argument("--costs", default=None, help='JSON file: {"target_id": cost_per_1k_tasks}')
+    ap.add_argument("--threshold", type=float, default=0.8, help="competence bar (default 0.8)")
     sp = sub.add_parser("score", help="score a predictions file")
     sp.add_argument("predictions", help="JSONL with {id, prediction:[...]} rows")
     args = p.parse_args(argv)
@@ -105,6 +110,16 @@ def main(argv: list[str] | None = None) -> int:
     elif args.cmd == "template":
         for t in load_tasks():
             print(json.dumps({"id": t["id"], "prediction": []}))
+    elif args.cmd == "analyze":
+        from .pareto import analyze
+        with open(args.scorecard, encoding="utf-8") as f:
+            card = json.load(f)
+        costs = {}
+        if args.costs:
+            with open(args.costs, encoding="utf-8") as f:
+                costs = {str(k): float(v) for k, v in json.load(f).items()}
+        print(json.dumps(analyze(card, costs, args.threshold), indent=2, ensure_ascii=False))
+        print(f"\n{DISCLAIMER}", file=sys.stderr)
     elif args.cmd == "run":
         from .harness import load_generators, run_scorecard
         card = run_scorecard(load_generators(args.generators),

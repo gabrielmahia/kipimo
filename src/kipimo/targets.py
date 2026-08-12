@@ -15,6 +15,24 @@ Families:
 
 `endpoint_env` names the environment variables an external generator is
 expected to read (OpenAI-compatible convention). Nothing here reads them.
+
+DEPLOYMENT PROFILE (optional, per target)
+-----------------------------------------
+Accuracy alone cannot answer the question East African institutions actually
+face, which is not "which model is best?" but "what is the cheapest model we
+can run ourselves that clears the competence bar?" Targets may therefore carry:
+
+    license        SPDX-ish string ("MIT", "Apache-2.0", "CC-BY-NC-4.0",
+                   "proprietary", "custom") — governs whether self-hosting and
+                   commercial/civic redeployment are even permitted
+    self_hostable  bool — weights obtainable and runnable outside a vendor API
+    hardware_tier  "edge" | "workstation" | "server" | "datacenter" | "api-only"
+    offline_capable bool — can serve with no internet at inference time
+
+Cost and latency are deliberately NOT stored here. Vendor prices change weekly
+and vary by region; a number frozen in a registry is a number that quietly goes
+wrong. Cost is supplied per-run by the operator (see kipimo.pareto) and latency
+is measured by the harness. The registry holds only slow-moving facts.
 """
 
 from __future__ import annotations
@@ -30,6 +48,10 @@ TARGETS: list[dict] = [
         "params_b": None,
         "endpoint_env": ["ANTHROPIC_API_KEY"],
         "notes": "reference frontier closed model",
+        "license": "proprietary",
+        "self_hostable": False,
+        "hardware_tier": "api-only",
+        "offline_capable": False,
     },
     {
         "id": "gpt-5.6",
@@ -38,6 +60,10 @@ TARGETS: list[dict] = [
         "params_b": None,
         "endpoint_env": ["OPENAI_API_KEY"],
         "notes": "reference frontier closed model",
+        "license": "proprietary",
+        "self_hostable": False,
+        "hardware_tier": "api-only",
+        "offline_capable": False,
     },
     # --- open weights (frontier-adjacent, downloadable) ---
     {
@@ -47,6 +73,10 @@ TARGETS: list[dict] = [
         "params_b": 1000,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
         "notes": "weights public (HF, ~900k downloads); 1T MoE; strong agentic/tool-use; self-hostable via vLLM/SGLang/Ollama",
+        "license": "Modified-MIT",
+        "self_hostable": True,
+        "hardware_tier": "datacenter",
+        "offline_capable": True,
     },
     {
         "id": "kimi-k3",
@@ -55,6 +85,10 @@ TARGETS: list[dict] = [
         "params_b": 2800,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
         "notes": "2.8T MoE, 104B active; weights PUBLIC on HF (moonshotai/Kimi-K3, native multimodal, 1M ctx) under the custom \"Kimi K3 License\" — read LICENSE before redistribution (NOT MIT/Apache); strong agentic/MCP scores make it a valid frontier reference",
+        "license": "custom (Kimi K3 License)",
+        "self_hostable": True,
+        "hardware_tier": "datacenter",
+        "offline_capable": True,
     },
     {
         "id": "glm-5.2",
@@ -63,6 +97,10 @@ TARGETS: list[dict] = [
         "params_b": None,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
         "notes": "leads open-weight intelligence indices at time of listing",
+        "license": "MIT",
+        "self_hostable": True,
+        "hardware_tier": "datacenter",
+        "offline_capable": True,
     },
     {
         "id": "deepseek-v4-pro",
@@ -71,6 +109,10 @@ TARGETS: list[dict] = [
         "params_b": None,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
         "notes": "measurable regional install base (11-14% share in four African markets)",
+        "license": "MIT (verify on repo)",
+        "self_hostable": True,
+        "hardware_tier": "datacenter",
+        "offline_capable": True,
     },
     {
         "id": "nemotron-3-ultra",
@@ -79,6 +121,10 @@ TARGETS: list[dict] = [
         "params_b": None,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
         "notes": "US open-weight entrant; ships with open data and recipes",
+        "license": "NVIDIA-Open-Model (verify)",
+        "self_hostable": True,
+        "hardware_tier": "datacenter",
+        "offline_capable": True,
     },
     # --- small open (the deployment tier nobody measures) ---
     {
@@ -88,6 +134,10 @@ TARGETS: list[dict] = [
         "params_b": 14,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
         "notes": "runnable on a single consumer GPU",
+        "license": "Apache-2.0",
+        "self_hostable": True,
+        "hardware_tier": "workstation",
+        "offline_capable": True,
     },
     {
         "id": "llama-4-scout",
@@ -96,6 +146,10 @@ TARGETS: list[dict] = [
         "params_b": 17,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
         "notes": "active-parameter class; edge-adjacent",
+        "license": "Llama-4-Community",
+        "self_hostable": True,
+        "hardware_tier": "server",
+        "offline_capable": True,
     },
     {
         "id": "gemma-3-12b",
@@ -104,6 +158,10 @@ TARGETS: list[dict] = [
         "params_b": 12,
         "endpoint_env": ["KIPIMO_BASE_URL", "KIPIMO_API_KEY"],
         "notes": "runnable on a single consumer GPU",
+        "license": "Gemma-Terms",
+        "self_hostable": True,
+        "hardware_tier": "workstation",
+        "offline_capable": True,
     },
     {
         "id": "tiny-aya-earth",
@@ -117,6 +175,10 @@ TARGETS: list[dict] = [
             "CC-BY-NC-4.0. Sits between InkubaLM 0.4B and the ~12B tier. Verify exact "
             "HF repo id before use."
         ),
+        "license": "CC-BY-NC-4.0",
+        "self_hostable": True,
+        "hardware_tier": "edge",
+        "offline_capable": True,
     },
     {
         "id": "inkubalm-0.4b",
@@ -131,6 +193,10 @@ TARGETS: list[dict] = [
             "non-commercial redistribution. The floor of the deployment tier this "
             "benchmark exists to measure."
         ),
+        "license": "CC-BY-NC-4.0",
+        "self_hostable": True,
+        "hardware_tier": "edge",
+        "offline_capable": True,
     },
 ]
 
