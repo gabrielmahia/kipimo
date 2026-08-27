@@ -103,7 +103,7 @@ def main(argv: list[str]) -> int:
         try:
             raw = call_model(base_url, api_key, model, t["input"])
             pred = parse_prediction(t["type"], raw)
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:
             print(f"# {t['id']} failed: {e}", file=sys.stderr)
             pred = []
         print(json.dumps({"id": t["id"], "prediction": pred}))

@@ -5,7 +5,6 @@ import json
 from kipimo import FAMILIES, TARGETS, get_target, list_targets
 from kipimo.cli import main
 
-
 CORE = {"id", "label", "family", "params_b", "endpoint_env", "notes"}
 PROFILE = {"license", "self_hostable", "hardware_tier", "offline_capable"}
 HARDWARE = {"edge", "workstation", "server", "datacenter", "api-only"}

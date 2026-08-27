@@ -1,8 +1,7 @@
 """Harness tests — the load-bearing property is that UNTESTED is never scored as zero."""
-import json
 import sys
 
-from kipimo.harness import run_target, run_scorecard
+from kipimo.harness import run_scorecard, run_target
 
 GOOD = f'{sys.executable} -c "import sys,json\nfor l in sys.stdin:\n    l=l.strip()\n    if l: t=json.loads(l); print(json.dumps({{\'id\':t[\'id\'],\'prediction\':[\'mpesa-mcp\']}}))"'
 CRASH = f'{sys.executable} -c "import sys; sys.exit(3)"'
