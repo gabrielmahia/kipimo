@@ -33,6 +33,36 @@ The models deployable under African data-sovereignty constraints are open-weight
 - Scores measure stack-routing competence, not general Swahili fluency.
 - Dataset: **CC BY 4.0** (usable by everyone, including commercial labs — that's the point). Harness: **MIT**.
 
+## Complementary benchmarks — what kipimo does not measure
+
+kipimo measures institutional-routing competence: can a model correctly navigate
+the East Africa coordination stack in Swahili. It deliberately does not measure
+general reasoning, NLI, or math in African languages — that would duplicate work
+that already exists and is well-maintained.
+
+**[IrokoBench](https://arxiv.org/abs/2406.03368)** (Masakhane, Lelapa AI, Cohere
+For AI, and 13 other institutions) covers NLI, mathematical reasoning, and
+multiple-choice QA across 17 African languages including Swahili. If you need to
+know whether a model can *reason* in Swahili, use IrokoBench. If you need to know
+whether it can *route a Swahili institutional request through an unfamiliar MCP
+ecosystem*, use kipimo. The two are complementary axes, not competing
+leaderboards — a model can score well on one and poorly on the other, and both
+numbers are useful.
+
+We do not vendor or duplicate IrokoBench's tasks here. Contribute upstream to
+Masakhane rather than building a parallel general-reasoning suite inside kipimo.
+
+## Related evaluation gaps (tracked upstream)
+
+Independent research corroborates a gap this stack has also identified
+separately (`nairobi-stack` gap register, G13): current models largely
+**cannot process speech in African languages at all** — see the Afri-MCQA
+findings presented at AfricaNLP 2026 (7th Workshop, EACL 2026), which found
+models "unable to process speech in African languages," lacking cultural
+context, and struggling to *generate* culturally relevant responses rather than
+merely recognize them. Two independent efforts converging on the same missing
+capability from different directions is a stronger signal than either alone.
+
 ## IP & Collaboration
 
 MIT-licensed harness, CC BY 4.0 data. Feedback via GitHub Issues only — pull requests are not accepted; task corrections and additions via Issues are actively wanted. Full policy: [docs/architecture/IP_POLICY.md](docs/architecture/IP_POLICY.md). Security: see [SECURITY.md](SECURITY.md).
