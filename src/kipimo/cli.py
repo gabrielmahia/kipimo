@@ -98,6 +98,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--threshold", type=float, default=0.8, help="competence bar (default 0.8)")
     sp = sub.add_parser("score", help="score a predictions file")
     sp.add_argument("predictions", help="JSONL with {id, prediction:[...]} rows")
+    sp.add_argument("--stratify", action="store_true",
+                    help="also report server_routing split by whether the request contains the server name")
+    bp = sub.add_parser("baseline", help="emit a no-model reference predictions JSONL (server_routing only)")
+    bp.add_argument("kind", choices=("lexical",), help="lexical: character-trigram match to server names")
     args = p.parse_args(argv)
 
     if args.cmd == "targets":
@@ -110,6 +114,12 @@ def main(argv: list[str] | None = None) -> int:
     elif args.cmd == "template":
         for t in load_tasks():
             print(json.dumps({"id": t["id"], "prediction": []}))
+    elif args.cmd == "baseline":
+        from .baselines import lexical_predictions
+        for tid, pred in lexical_predictions(load_tasks()).items():
+            print(json.dumps({"id": tid, "prediction": pred}))
+        print("Note: server_routing only. Read ONLY the server_routing figure; the other task types are "
+              "UNTESTED (unknown, not zero), so ignore 'overall'.", file=sys.stderr)
     elif args.cmd == "analyze":
         from .pareto import analyze
         with open(args.scorecard, encoding="utf-8") as f:
@@ -136,6 +146,15 @@ def main(argv: list[str] | None = None) -> int:
         if rep["n_missing"]:
             print(f"Note: {rep['n_missing']} task(s) had no prediction and scored 0. "
                   f"Run `kipimo template` for the full id list.", file=sys.stderr)
+        if args.stratify:
+            from .baselines import score_stratified
+            preds = {}
+            with open(args.predictions, encoding="utf-8") as f:
+                for line in f:
+                    if line.strip():
+                        row = json.loads(line)
+                        preds[row["id"]] = row.get("prediction", [])
+            print(json.dumps({"server_routing_by_stratum": score_stratified(preds, load_tasks())}, indent=2))
     return 0
 
 
