@@ -33,6 +33,17 @@ The models deployable under African data-sovereignty constraints are open-weight
 - Scores measure stack-routing competence, not general Swahili fluency.
 - Dataset: **CC BY 4.0** (usable by everyone, including commercial labs — that's the point). Harness: **MIT**.
 
+## Reference floor: a baseline with no model
+
+On `server_routing`, 12 of the 25 requests literally contain a token of the gold server name (for example `mkopo`, `bima`, `KRA`). A matcher with no model scores 11/25 on this task set: 11/12 on those requests and 0/13 on the rest. Read any routing score next to that floor, and split by stratum:
+
+```
+kipimo baseline lexical > floor.jsonl     # no model; server_routing only
+kipimo score floor.jsonl --stratify       # adds server_routing_by_stratum (literal vs semantic)
+```
+
+Only the `server_routing` figure is meaningful for the baseline; the other task types are untested (unknown, not zero), so ignore `overall`. The server list it matches against is the public fleet listing, independent of the benchmark's gold answers. Background and measurements: issue #8.
+
 ## Complementary benchmarks — what kipimo does not measure
 
 kipimo measures institutional-routing competence: can a model correctly navigate

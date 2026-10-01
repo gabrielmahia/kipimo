@@ -24,3 +24,7 @@ their Swahili task competence. On this scorecard they are first-class citizens.
 Results go to the leaderboard Space (huggingface.co/spaces/gmahia/kipimo-leaderboard)
 with the predictions file attached. Disagreements are settled by re-running, not
 by argument — the scorer is deterministic and never calls a model.
+
+## Report the floor and the strata (added after issue #8)
+
+Every `server_routing` figure in a scorecard should be accompanied by the no-model baseline (`kipimo baseline lexical`) and by the literal / semantic split (`kipimo score --stratify`). A gain that appears only in the literal stratum is surface-form matching, not routing ability. Untested remains unknown, not zero.
