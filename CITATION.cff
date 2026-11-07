@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "kipimo"
+abstract: "Swahili agent-task evaluation suite for the East Africa coordination stack — model-agnostic seed benchmark (46 tasks: server routing, term grounding, cascade routing)."
+version: "0.4.1"
+authors:
+  - family-names: "Mahia"
+    given-names: "Gabriel"
+repository-code: "https://github.com/gabrielmahia/kipimo"
+license: "MIT"
